@@ -1,28 +1,35 @@
 "use client";
 
 import React from "react";
-import { GitHubCalendar } from "react-github-calendar";
-import { GitHubProjects } from "@/components/GitHubProjects";
+import dynamic from "next/dynamic";
 import styles from "./styles/GitHub.module.css";
 import "@/app/globals.css";
+
+const GitHubCalendar = dynamic(
+  () => import("react-github-calendar").then((mod) => mod.GitHubCalendar),
+  {
+    ssr: false,
+    loading: () => <div className={styles.loading}>Loading contribution calendar...</div>,
+  }
+);
 
 export default function GitHubSection() {
   const username = "Ultrasword";
 
   return (
-    <div 
-      id="GitHub" 
+    <div
+      id="GitHub"
       className={`section-container ${styles.container}`}
       style={{ border: "1px solid rgba(255, 255, 255, 0.2)", borderRadius: "5px" }}
     >
       <div className={styles.content}>
-        <h1 className={styles.title}>GitHub Activity</h1>
+        <h2 className={styles.title}>GitHub Activity</h2>
         <p className={styles.subtitle}>
           Check out my open source contributions and latest repositories.
         </p>
 
         <div className={styles.calendarContainer}>
-          <GitHubCalendar 
+          <GitHubCalendar
             username={username}
             colorScheme="dark"
             blockSize={12}
@@ -30,10 +37,6 @@ export default function GitHubSection() {
             fontSize={16}
           />
         </div>
-
-        {/* <div className={styles.projectsContainer}>
-           <GitHubProjects username={username} />
-        </div> */}
       </div>
     </div>
   );

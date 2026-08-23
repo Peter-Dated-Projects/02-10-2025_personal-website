@@ -25,16 +25,16 @@ export async function fetchGitHubRepos(username: string): Promise<GitHubRepo[]> 
     });
 
     // Map to our interface and filter out forks if desired (keeping forks for now as user asked for active repos)
-    const repos: GitHubRepo[] = response.data.map((repo: any) => ({
+    const repos: GitHubRepo[] = response.data.map((repo) => ({
       id: repo.id,
       name: repo.name,
       description: repo.description,
       html_url: repo.html_url,
-      stargazers_count: repo.stargazers_count,
-      language: repo.language,
-      updated_at: repo.updated_at,
+      stargazers_count: repo.stargazers_count ?? 0,
+      language: repo.language ?? null,
+      updated_at: repo.updated_at ?? null,
       owner: {
-        login: repo.owner.login,
+        login: repo.owner?.login ?? username,
       },
     }));
 
