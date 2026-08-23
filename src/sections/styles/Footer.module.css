@@ -42,9 +42,16 @@
 }
 
 .footer-item a {
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
 
   align-self: flex-start;
   justify-self: flex-start;
+}
+
+.footer-heading {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: rgba(255, 255, 255, 0.95);
 }

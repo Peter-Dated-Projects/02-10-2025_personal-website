@@ -4,7 +4,6 @@ import "@/app/globals.css";
 import styles from "./styles/Projects.module.css";
 
 import { SingleCard, SingleCardProps } from "@/components/SingleCard";
-import { GitHubProjects } from "@/components/GitHubProjects";
 
 const cardProps = [
   {

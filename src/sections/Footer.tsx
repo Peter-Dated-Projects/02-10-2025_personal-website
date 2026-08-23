@@ -54,7 +54,7 @@ export function Footer() {
         {footerInfo.map((info, i) => (
           <div key={i}>
             <div>
-              <h3>{info.title}</h3>
+              <h2 className={styles["footer-heading"]}>{info.title}</h2>
             </div>
             <div className={styles["footer-item"]}>
               {info.items.map((item, j) => (
@@ -79,7 +79,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
+            <Image src="/window.svg" alt="" width={16} height={16} aria-hidden="true" />
             Source Code
           </a>
         </div>

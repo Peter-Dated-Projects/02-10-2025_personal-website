@@ -2,10 +2,14 @@
 
 import "@/app/globals.css";
 import styles from "./styles/Hero.module.css";
-
-import TypewriterComponent from "typewriter-effect";
+import dynamic from "next/dynamic";
 
 import ParticleBackground from "@/components/ParticleSim";
+
+const TypewriterComponent = dynamic(() => import("typewriter-effect"), {
+  ssr: false,
+  loading: () => <span>Software Engineer...</span>,
+});
 
 export default function HeroSection() {
   const titles = [
@@ -19,13 +23,12 @@ export default function HeroSection() {
 
   return (
     <div id={"Hero"} style={{ width: "100%", top: 0, left: 0 }}>
-      <div className={styles["container"]}>
+      <div className={styles["container"]} aria-hidden="true">
         <div className={`${styles["hero-background"]} ${styles["hero-background-mask"]}`}>
           <ParticleBackground />
         </div>
       </div>
 
-      {/* text and visuals */}
       <div className={`section-container ${styles["hero-container"]}`} style={{ width: "100%" }}>
         <div
           className={styles["hero-container"]}
@@ -41,13 +44,13 @@ export default function HeroSection() {
           <div>
             <div className={styles["hero-subtitle"]}>
               <span>I&apos;m a&nbsp;</span>
-              <span>
+              <span aria-live="polite">
                 <TypewriterComponent
                   options={{
                     strings: titles,
                     autoStart: true,
                     loop: true,
-                    delay: 50, // Adjust the delay to make the typing faster
+                    delay: 50,
                   }}
                 />
               </span>

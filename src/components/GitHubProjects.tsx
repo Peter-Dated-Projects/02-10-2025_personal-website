@@ -85,7 +85,7 @@ export function GitHubProjects({ username }: GitHubProjectsProps) {
             className={styles.card}
           >
             <div className={styles.header}>
-              <h4 className={styles.title}>{repo.name}</h4>
+              <h3 className={styles.title}>{repo.name}</h3>
               <div className={styles.stars}>
                 <span>★</span> {repo.stargazers_count}
               </div>

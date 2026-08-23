@@ -28,10 +28,12 @@ export function ExperienceCard({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div 
+    <button
+      type="button"
       className={styles[`container-${index % 2 == 0 ? "a" : "b"}`]}
       onClick={() => setIsExpanded(!isExpanded)}
-      style={{ cursor: "pointer", transition: "all 0.3s ease" }}
+      aria-expanded={isExpanded}
+      style={{ cursor: "pointer", transition: "all 0.3s ease", border: "none", width: "100%", textAlign: "left", color: "inherit" }}
     >
       <div className={styles["container-sub-parent"]}>
         <div className={styles["experience-viewer-item"]}>
@@ -65,20 +67,20 @@ export function ExperienceCard({
                 >
                   {company}
                 </p>
-                <p style={{ fontSize: "14px", fontFamily: "var(--subtitle-font)", margin: 0, opacity: 0.8 }}>
+                <p style={{ fontSize: "14px", fontFamily: "var(--subtitle-font)", margin: 0, color: "rgba(255, 255, 255, 0.9)" }}>
                   {position}
                 </p>
               </div>
             </div>
             
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", justifyContent: "center" }}>
-               <div style={{ fontSize: "12px", opacity: 0.7, marginBottom: "4px" }}>
+               <div style={{ fontSize: "12px", color: "rgba(255, 255, 255, 0.85)", marginBottom: "4px" }}>
                   {startDate} - {current ? "Present" : endDate}
                </div>
-               <div style={{ fontSize: "12px", opacity: 0.7 }}>
+               <div style={{ fontSize: "12px", color: "rgba(255, 255, 255, 0.85)" }}>
                   {location}
                </div>
-               <div style={{ marginTop: "5px", fontSize: "10px", opacity: 0.5 }}>
+               <div style={{ marginTop: "5px", fontSize: "10px", color: "rgba(255, 255, 255, 0.7)" }}>
                  {isExpanded ? "Click to collapse" : "Click to expand"}
                </div>
             </div>
@@ -109,6 +111,6 @@ export function ExperienceCard({
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

@@ -126,6 +126,8 @@ const ParticleBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
+      role="presentation"
       style={{
         zIndex: -1,
         width: "100%",

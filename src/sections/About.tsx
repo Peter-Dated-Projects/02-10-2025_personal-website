@@ -7,19 +7,19 @@ import styles from "./styles/About.module.css";
 import MovingArrow from "@/components/MovingArrow";
 import ParticleBackground from "@/components/ParticleSim";
 
-export default function AboutSection() {
-  const images = [
-    "/collage/gamedev.mp4",
-    "/collage/IMG_6105.JPG",
-    "/collage/gamedev1.png",
-    "/collage/portfolio1.png",
-    "/collage/ski1.png",
-    "/collage/tremblant1.png",
-    "/collage/groupphoto.png",
-    "/collage/IMG_6056.JPG",
-    "/collage/IMG_6169.JPG",
-  ];
+const collageImages = [
+  { src: "/collage/gamedev.mp4", alt: "Game development footage", type: "video" as const },
+  { src: "/collage/IMG_6105.webp", alt: "Skiing on the slopes", type: "image" as const },
+  { src: "/collage/gamedev1.webp", alt: "Game development workspace", type: "image" as const },
+  { src: "/collage/portfolio1.webp", alt: "Portfolio website preview", type: "image" as const },
+  { src: "/collage/ski1.webp", alt: "Skiing adventure", type: "image" as const },
+  { src: "/collage/tremblant1.webp", alt: "Tremblant ski trip", type: "image" as const },
+  { src: "/collage/groupphoto.webp", alt: "Group photo with friends", type: "image" as const },
+  { src: "/collage/IMG_6056.webp", alt: "Outdoor adventure photo", type: "image" as const },
+  { src: "/collage/IMG_6169.webp", alt: "Personal photo", type: "image" as const },
+];
 
+export default function AboutSection() {
   return (
     <div id={"About"} className={styles["container"]}>
       <div style={{ height: "100px", justifyContent: "center", display: "flex" }}>
@@ -77,10 +77,9 @@ export default function AboutSection() {
           style={{ border: "1px solid rgba(255, 255, 255, 0.2)", padding: "5px" }}
         >
           <div className={styles["collage-container"]}>
-            {/* insert an image of me?? or a compilation of a few images? */}
-            {Array.from({ length: 9 }).map((_, i) => (
+            {collageImages.map((item, i) => (
               <div
-                key={i}
+                key={item.src}
                 style={{
                   gridArea: i === 0 ? "circle" : "auto",
                   overflow: "hidden",
@@ -88,17 +87,33 @@ export default function AboutSection() {
                   maxHeight: "100%",
                 }}
               >
-                {images[i].endsWith(".mp4") ? (
-                  <video autoPlay muted loop playsInline style={{ width: "100%" }}>
-                    <source src={images[i]} type="video/mp4" />
+                {item.type === "video" ? (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    style={{ width: "100%" }}
+                    aria-label={item.alt}
+                  >
+                    <source src={item.src} type="video/mp4" />
+                    <track
+                      kind="captions"
+                      src="/collage/gamedev-captions.vtt"
+                      srcLang="en"
+                      label="English captions"
+                      default
+                    />
                   </video>
                 ) : (
                   <div className={styles["collage-image"]}>
                     <Image
-                      src={images[i]}
-                      alt={`image${i}`}
-                      width={500}
-                      height={500}
+                      src={item.src}
+                      alt={item.alt}
+                      width={400}
+                      height={400}
+                      sizes="(max-width: 768px) 50vw, 300px"
+                      loading={i < 3 ? "eager" : "lazy"}
                       style={{
                         display: "flex",
                         width: "100%",
@@ -117,9 +132,9 @@ export default function AboutSection() {
         <div className={styles["bottom-container"]}>
           <p>Anyways...</p>
           <div className={styles["bottom-title"]}>
-            <h1 style={{ fontWeight: "bold", textAlign: "center" }}>
+            <h2 style={{ fontWeight: "bold", textAlign: "center" }}>
               <span className={"text-gradient-mask-p1"}>Welcome to my personal website!</span>
-            </h1>
+            </h2>
           </div>
         </div>
         <div className={styles["bottom-content"]}>
